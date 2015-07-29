@@ -8,6 +8,7 @@ Instalação
  - Acesse através do Painel de Administração o menu "Opções" -> "Pagamentos" -> "Portais para Pagamentos"
  - Ative o módulo "PagSeguro API Lite (SuporteWHMCS.Com.Br)"
  - Preencha, nas opções do módulo, o email e o token da sua conta PagSeguro. Se desejar, mude também o campo "Exibir o nome" para somente "PagSeguro", este é o nome que será exibido para seus clientes
+ - Para o retorno automático das transações, não é necessária nenhuma configuração especial.
 
 O que este módulo oferece?
 --------------------------
@@ -20,6 +21,7 @@ O que este módulo não oferece?
 - Opções de customização: se desejar modificar a aparência ou comportamento do módulo, precisará editar o seu código fonte. Em breve estará disponível um fork totalmente configurável.
 - Tratamento de erros: como os dados passados para o PagSeguro são extremamente limitados e independem de dados informados pelo usuário, as duas únicas possibilidades de erros ocorrerem seria pela configuração incorreta (Email ou token inválidos) ou falha na comunicação com os servidores do PagSeguro. Neste caso, apenas é exibida ao usuário uma mensagem informando que ocorreu um erro na comunicação. Mais informações podem ser obtidas através do "Log dos Portais".
 - Tratamento de disputas e estornos: tais operações, que representam um percentual ínfimo das transações totais, devem ser tratadas manualmente.
+- Possibilidade de checkout transparente (Lightbox). Esta funcionalidade será implementada em outra versão do módulo.
 
 Dúvidas, sugestões, bugs?
 -------------------------
