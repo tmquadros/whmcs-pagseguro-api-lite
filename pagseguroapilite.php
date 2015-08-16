@@ -51,7 +51,7 @@ if (basename(__FILE__) == basename($_SERVER['SCRIPT_NAME'])) {
         header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
         die();
     }
-    require '../../dbconnect.php';
+    require '../../init.php';
     require '../../includes/invoicefunctions.php';
     require '../../includes/gatewayfunctions.php';
 
