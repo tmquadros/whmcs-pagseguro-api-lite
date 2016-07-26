@@ -5,6 +5,7 @@ function pagseguroapilite_config()
         'FriendlyName' => array('Type' => 'System', 'Value' => 'PagSeguro API Lite (SuporteWHMCS.Com.Br)'),
         'email'        => array('FriendlyName' => 'Email', 'Type' => 'text', 'Size' => '40'),
         'token'        => array('FriendlyName' => 'Token', 'Type' => 'text', 'Size' => '50'),
+        'tipo'         => array('FriendlyName' => 'Tipo de Checkout', 'Type' => 'dropdown', 'Options' => 'Padrão,Lightboxx'),
     );
 }
 
@@ -35,10 +36,21 @@ function pagseguroapilite_link($params)
     $retorno_curl    = curl_exec($curl);
     $checkout_parsed = simplexml_load_string($retorno_curl);
     if ($checkout_parsed->code) {
-        $result = '<form action="https://pagseguro.uol.com.br/v2/checkout/payment.html" method="get">' . "\n";
-        $result .= '    <input type="hidden" name="code" value="' . $checkout_parsed->code . '">' . "\n";
-        $result .= '    <input type="submit" value="Pagar Agora">' . "\n";
-        $result .= '</form>' . "\n";
+        if ($params["tipo"] == "Lightbox") {
+            $result .= '<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>'."\n";
+            $result .= '<script>'."\n";
+            $result .= 'function iniciaPagamento() {'."\n";
+            $result .= '  if (!PagSeguroLightbox("'.$checkout_parsed->code.'")) location.href="https://pagseguro.uol.com.br/v2/checkout/payment.html?code='.$checkout_parsed->code.'"'."\n";
+            $result .= '}'."\n";
+            $result .= '</script>'."\n";
+            $result .= '    <input type="button" value="Pagar Agora" onclick="iniciaPagamento();">' . "\n";
+        }
+        else {
+            $result = '<form action="https://pagseguro.uol.com.br/v2/checkout/payment.html" method="get">' . "\n";
+            $result .= '    <input type="hidden" name="code" value="' . $checkout_parsed->code . '">' . "\n";
+            $result .= '    <input type="submit" value="Pagar Agora">' . "\n";
+            $result .= '</form>' . "\n";
+        }
     } else {
         $result = '<font style="color:red">Ocorreu um erro na comunicação com o PagSeguro</font>';
         logTransaction($params['name'], $retorno_curl . print_r($params, true) . ($checkout_parsed ? " / " . $checkout_parsed : ""), 'Unsuccessful');
