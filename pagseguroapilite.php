@@ -5,7 +5,7 @@ function pagseguroapilite_config()
         'FriendlyName' => array('Type' => 'System', 'Value' => 'PagSeguro API Lite (SuporteWHMCS.Com.Br)'),
         'email'        => array('FriendlyName' => 'Email', 'Type' => 'text', 'Size' => '40'),
         'token'        => array('FriendlyName' => 'Token', 'Type' => 'text', 'Size' => '50'),
-        'tipo'         => array('FriendlyName' => 'Tipo de Checkout', 'Type' => 'dropdown', 'Options' => 'Padrão,Lightboxx'),
+        'tipo'         => array('FriendlyName' => 'Tipo de Checkout', 'Type' => 'dropdown', 'Options' => 'Padrão,Lightbox'),
     );
 }
 
