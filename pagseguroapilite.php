@@ -78,6 +78,7 @@ if (basename(__FILE__) == basename($_SERVER['SCRIPT_NAME'])) {
     checkCbTransID($xml->code);
 
     if ($xml->status == 3 || $xml->status == 4) {
-        addInvoicePayment($invoiceid, $xml->code, (float)$xml->grossAmount, 0, 'pagseguroapilite');
+        $feeAmount = (float)$xml->creditorFees->intermediationRateAmount + (float)$xml->creditorFees->intermediationFeeAmount;
+        addInvoicePayment($invoiceid, $xml->code, (float)$xml->grossAmount, $feeAmount, 'pagseguroapilite');
     }
 }
